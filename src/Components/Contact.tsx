@@ -7,10 +7,11 @@ export const Contact = () => {
 
   return (
     <div>
-      <h1>Página de Contacto</h1>
-      <p className='text-primary'>Nombre: {user.name}</p>
-      <p className='text-primary'>Teléfono: {user.phone}</p>
+    <h1>Contact</h1>
+    <p>Esta es la página de Contacto</p>
+    <p>Estos son los datos de contacto de: <strong>{nameContact.phone}</strong></p>
+    <p>Objeto: {JSON.stringify(nameContact)}</p>
   </div>
-  )
+)
 }
 export default Contact
