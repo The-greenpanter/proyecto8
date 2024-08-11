@@ -128,3 +128,10 @@ body {
   height: 80px;
   margin-right: 10px;
 }
+img {
+  max-width: 250px;
+}
+.articulo{
+  display: flex;
+  
+}

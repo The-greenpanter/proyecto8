@@ -1,18 +1,27 @@
-import { createContext, useState } from "react";
+// Context.tsx
+import React, { createContext, useState, ReactNode } from 'react';
 
-export const Context = createContext(null);
+type UserType = {
+    username: string;
+    name: string;
+    phone: string;
+};
 
-export const ContextProvider = ({ children }) => {
-    const [user, setUser] = useState({});
-    const [isDarkMode, setIsDarkMode] = useState(false);
+type ContextType = {
+    user: UserType | null;
+    setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
+};
 
-    const toggleDarkMode = () => {
-        setIsDarkMode(prevMode => !prevMode);
-        document.body.classList.toggle('dark-mode', !isDarkMode);
-    };
+export const Context = createContext<ContextType>({
+    user: null,
+    setUser: () => { },
+});
+
+export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [user, setUser] = useState<UserType | null>(null);
 
     return (
-        <Context.Provider value={{ user, setUser, isDarkMode, toggleDarkMode }}>
+        <Context.Provider value={{ user, setUser }}>
             {children}
         </Context.Provider>
     );

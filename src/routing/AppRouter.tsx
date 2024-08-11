@@ -5,7 +5,7 @@ import { ErrorPage } from "../Components/ErrorPage.tsx";
 import { About } from "../Components/About.tsx";
 import { Contact } from "../Components/Contact.tsx";
 import { Login } from "../Components/Login.tsx";
-// import logo from '../assets/logo.png';
+import logo from '../assets/logo.png';
 import { useContext } from "react";
 import { Context } from "../context/Context";
 import { DetailArticle } from "../Components/DetailArticle.tsx";

@@ -1,5 +1,5 @@
 import './styles/App.css'
-import { AppRouter } from './routing/AppRouter'
+import { AppRouter } from './routing/AppRouter.tsx'
 import { Context } from './context/Context'
 import { useEffect, useState } from 'react';
 

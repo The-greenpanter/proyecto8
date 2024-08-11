@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Definición del tipo de datos para los artículos
+interface Article {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+}
+
 export const Articles = () => {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -11,10 +22,13 @@ export const Articles = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
+        const data: Article[] = await response.json();
         setArticles(data);
       } catch (error) {
         console.error('Error fetching articles:', error);
+        setError('Error al obtener los artículos. Por favor, inténtalo de nuevo más tarde.');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -23,12 +37,20 @@ export const Articles = () => {
 
   const MAX_DESCRIPTION_LENGTH = 100;
 
+  if (loading) {
+    return <p>Cargando artículos...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   return (
     <div className="container mt-5">
       <div className="row">
-        {articles.map(article => (
-          <div className="col-md-4 d-flex mb-4" key={article.id}>
-            <div className="card mb-4 shadow-sm h-100">
+        {articles.map((article) => (
+          <div className="col-md-6 d-flex mb-4" key={article.id}>
+            <div className="card py-2 mb-4 shadow-sm h-100">
               <img src={article.image} className="card-img-top" alt={article.title} />
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{article.title}</h5>
@@ -50,4 +72,5 @@ export const Articles = () => {
     </div>
   );
 };
-export default Articles
+
+export default Articles;
